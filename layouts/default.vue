@@ -1,61 +1,45 @@
 <template>
   <v-app dark>
-    <v-navigation-drawer
-      v-model="drawer"
-      :mini-variant="miniVariant"
-      :clipped="clipped"
-      fixed
-      app
-    >
-      <v-list>
-        <v-list-item
-          v-for="(item, i) in items"
-          :key="i"
-          :to="item.to"
-          router
-          exact
-        >
-          <v-list-item-action>
-            <v-icon>{{ item.icon }}</v-icon>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title v-text="item.title" />
-          </v-list-item-content>
-        </v-list-item>
-      </v-list>
-    </v-navigation-drawer>
-    <v-app-bar :clipped-left="clipped" fixed app>
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-      <v-btn icon @click.stop="miniVariant = !miniVariant">
-        <v-icon>mdi-{{ `chevron-${miniVariant ? 'right' : 'left'}` }}</v-icon>
-      </v-btn>
-      <v-btn icon @click.stop="clipped = !clipped">
-        <v-icon>mdi-application</v-icon>
-      </v-btn>
-      <v-btn icon @click.stop="fixed = !fixed">
-        <v-icon>mdi-minus</v-icon>
-      </v-btn>
-      <v-toolbar-title v-text="title" />
-      <v-spacer />
-      <v-btn icon @click.stop="rightDrawer = !rightDrawer">
-        <v-icon>mdi-menu</v-icon>
-      </v-btn>
+    <v-app-bar fixed app>
+      <v-row>
+        <v-col cols="12">
+          <div class="d-flex align-center">
+            <div class="logo d-none d-md-flex">
+              <v-img src="/img/logo.png" contain />
+            </div>
+            <div class="logo-small d-sm-flex d-md-none">
+              <v-img src="/img/logo-small.png" contain />
+            </div>
+            <div class="flex-grow-1 flex-shrink-0 mx-4">
+              <v-text-field
+                append-icon="mdi-magnify"
+                dense
+                hide-details=""
+                label="Outlined"
+                single-line
+                outlined
+              />
+            </div>
+            <div class="flex-grow-0 flex-shrink-1">
+              <div class="d-none d-md-flex">
+                <v-btn class="mr-2" color="primary" outlined>Masuk</v-btn>
+                <v-btn dense color="primary">Daftar</v-btn>
+              </div>
+              <div class="d-sm-flex d-md-none">
+                <v-btn icon color="primary">
+                  <v-icon>mdi-menu</v-icon>
+                </v-btn>
+              </div>
+            </div>
+          </div>
+        </v-col>
+      </v-row>
     </v-app-bar>
     <v-main>
       <v-container>
         <Nuxt />
       </v-container>
     </v-main>
-    <v-navigation-drawer v-model="rightDrawer" :right="right" temporary fixed>
-      <v-list>
-        <v-list-item @click.native="right = !right">
-          <v-list-item-action>
-            <v-icon light> mdi-repeat </v-icon>
-          </v-list-item-action>
-          <v-list-item-title>Switch drawer (click me)</v-list-item-title>
-        </v-list-item>
-      </v-list>
-    </v-navigation-drawer>
     <v-footer :absolute="!fixed" app>
       <span>&copy; {{ new Date().getFullYear() }}</span>
     </v-footer>
@@ -90,3 +74,12 @@ export default {
   },
 }
 </script>
+<style lang="scss">
+.logo {
+  height: 40px;
+  width: 175.4px;
+  &-small {
+    width: 40px;
+  }
+}
+</style>
